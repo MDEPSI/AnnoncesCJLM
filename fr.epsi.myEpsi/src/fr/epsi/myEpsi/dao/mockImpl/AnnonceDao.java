@@ -54,4 +54,17 @@ public class AnnonceDao implements IAnnonceDao {
 		return myAnnonces;
 	}
 
+
+	@Override
+	public Annonce getAnnonce(int id) {
+		// TODO Auto-generated method stub
+		Annonce myAnnonce = new Annonce();
+		for (Annonce annonce : listOfAnnonces) {
+			if(annonce.getId()==id) {
+				myAnnonce = annonce;
+			}
+		}
+		return myAnnonce;
+	}
+
 }

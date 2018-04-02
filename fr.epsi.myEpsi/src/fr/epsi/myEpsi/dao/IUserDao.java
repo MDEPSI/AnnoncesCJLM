@@ -8,4 +8,6 @@ public interface IUserDao {
 	List<Utilisateur> getUsers(String id);
 
 	boolean checkLogin(Utilisateur user);
+
+	Utilisateur getUtilisateur(String id);
 }

@@ -6,17 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Mes annonces</title>
+<title>Mon annonce</title>
 </head>
 <body>
 	<table>
-		<th>ANNONCES</th>
-		<% List <Annonce> myAnnonces = (List)request.getAttribute("ANNONCES");
-			for(Annonce annonce : myAnnonces){
+		<th>Annonce</th>
+		<% Annonce myAnnonce = (Annonce) request.getAttribute("ANNONCES");
 				out.print("<tr><td>");
-				out.print(annonce.getTitre());
+				out.print(myAnnonce.getTitre());
 				out.print("</td></tr>");
-			}%>
+			%>
 	</table>
 </body>
 </html>

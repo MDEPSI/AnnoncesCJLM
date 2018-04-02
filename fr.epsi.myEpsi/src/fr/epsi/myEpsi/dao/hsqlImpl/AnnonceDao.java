@@ -34,4 +34,10 @@ public class AnnonceDao implements IAnnonceDao{
 		}
 		return annonces;
 	}
+
+	@Override
+	public Annonce getAnnonce(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -49,6 +49,8 @@ public class StartupListener implements ServletContextListener {
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
+    	
+    	//appel a checkConnected()
     }
 	
 }

@@ -22,7 +22,7 @@ public class UserDao implements IUserDao{
 		listOfUsers.add(user);
 		
 		user = new Utilisateur();
-		user.setId("ID");
+		user.setId("ID2");
 		user.setNom("USER");
 		user.setPassword("ADMIN");
 		listOfUsers.add(user);
@@ -39,6 +39,17 @@ public class UserDao implements IUserDao{
 		return myUsers;
 	}
 
+	@Override
+	public Utilisateur getUtilisateur(String id) {
+		// TODO Auto-generated method stub
+		Utilisateur myUser = new Utilisateur();
+		for (Utilisateur user : listOfUsers) {
+			if(user.getId()==id) {
+				myUser = user;
+			}
+		}
+		return myUser;
+	}
 	
 	@Override
 	public boolean checkLogin(Utilisateur user) {
