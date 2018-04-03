@@ -48,8 +48,15 @@ public class getOneUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//ad et update
+		String nom = request.getParameter("nom");
+		String motDePasse = request.getParameter("motdepasse");
+		IUserDao userDao = new UserDao();
+		Utilisateur UserTest = new Utilisateur();
+		UserTest.setNom(nom);
+		UserTest.setPassword(motDePasse);
 		doGet(request, response);
+
+
 	}
 
 	

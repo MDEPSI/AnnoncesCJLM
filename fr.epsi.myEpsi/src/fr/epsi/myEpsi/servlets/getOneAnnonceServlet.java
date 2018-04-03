@@ -51,8 +51,12 @@ public class getOneAnnonceServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//add et update
+		String titre = request.getParameter("titre");
+		IAnnonceDao userDao = new AnnonceDao();
+		Annonce AnnonceTest = new Annonce();
+		AnnonceTest.setTitre(titre);
 		doGet(request, response);
+		System.out.println(titre);
 	}
 	
 	//ajouter delete

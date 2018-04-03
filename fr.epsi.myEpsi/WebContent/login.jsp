@@ -13,7 +13,7 @@
                 <legend>Connexion</legend>
                 <p>Vous pouvez vous connecter via ce formulaire.</p>
 
-                <label for="nom">Adresse email <span class="requis">*</span></label>
+                <label for="email">Adresse email <span class="requis">*</span></label>
                 <input type="email" id="email" name="email" value="" size="20" maxlength="60" required/>
                 <span class="erreur">${form.erreurs['email']}</span>
                 <br />
