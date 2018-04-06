@@ -5,9 +5,7 @@ import java.util.List;
 import fr.epsi.myEpsi.beans.Utilisateur;
 
 public interface IUserDao {
-	List<Utilisateur> getUsers(String id);
+	List<Utilisateur> getAllUsers();
 
-	boolean checkLogin(Utilisateur user);
-
-	Utilisateur getUtilisateur(String id);
+	Utilisateur getUserById(int id);
 }
