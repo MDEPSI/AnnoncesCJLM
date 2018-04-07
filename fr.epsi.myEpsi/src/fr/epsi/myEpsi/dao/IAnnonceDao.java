@@ -8,4 +8,6 @@ public interface IAnnonceDao {
 	List<Annonce> getAllAnnonces();
 
 	Annonce getAnnonceById(int id);
+	
+	int getNbAnnonces();
 }
