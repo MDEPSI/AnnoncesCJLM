@@ -77,4 +77,20 @@ public class AnnonceDao implements IAnnonceDao{
 		}
 		return offers;
 	}
+	
+	public static int getNbAnnonces() {
+        int nbAnnonces = 0;
+        String url = "127.0.0.1:9003";
+        Connection con;
+        try {
+        	con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
+			Statement stmt = con.createStatement();
+			ResultSet results = stmt.executeQuery("SELECT COUNT(ID) FROM ANNONCES");
+            nbAnnonces = results;               
+            con.close();
+        }  catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return nbAnnonces;
+    }
 }
