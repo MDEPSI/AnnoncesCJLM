@@ -57,26 +57,23 @@ public class UserDao
 		return user;
 	}
 	
-	public static Utilisateur addUser(int id, String password, String nom, boolean administrateur) {
+	public void addUser(int id, String password, String nom, boolean administrateur) {
 		Utilisateur user = new Utilisateur();
 		String url = "127.0.0.1:9003";
 		Connection con;
 		try {
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
 			Statement stmt = con.createStatement();
-			ResultSet results = stmt.executeQuery("INSERT INTO UTILISATEURS (ID , PASSWORD ,  NAME, ISADMINISTRATOR)");
-
-			if(results.next()){
-				user.setId(results.getString(1));
-				user.setPassword(results.getString(2));
-				user.setAdministrateur(results.getBoolean(4));
-				user.setNom(results.getString(3));
-			}
+			ResultSet results = stmt.executeQuery("INSERT INTO UTILISATEURS (ID , PASSWORD ,  NAME, ISADMINISTRATOR) VALUES (?,?,?,?)");
+			
+			user.setId(results.getString(1));
+			user.setPassword(results.getString(2));
+			user.setAdministrateur(results.getBoolean(4));
+			user.setNom(results.getString(3));
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return user;
 	}
 
 

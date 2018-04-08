@@ -15,5 +15,7 @@ public interface IAnnonceDao {
 	
 	int getNbAnnonces();
 	
-	Annonce addAnnonce(int id, String titre, String description, Double prix, Utilisateur vendeur, Date creation, int statut);
+	void addAnnonce(int id, String titre, String description, Double prix, Utilisateur vendeur, Date creation, int statut);
+	
+	void deleteAnnonce(int id);
 }

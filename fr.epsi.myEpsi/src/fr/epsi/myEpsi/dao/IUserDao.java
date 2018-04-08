@@ -10,5 +10,5 @@ public interface IUserDao {
 
 	Utilisateur getUserById(int id);
 	
-	Utilisateur addUser(int id, String password, String nom, boolean administrateur);
+	void addUser(int id, String password, String nom, boolean administrateur);
 }

@@ -93,15 +93,14 @@ public class AnnonceDao implements IAnnonceDao{
         return nbAnnonces;
     }
 	
-	public static Annonce addAnnonce(int id, String titre, String description, Utilisateur vendeur, Date creation, Double prix, int statut) {
+	public void addAnnonce(int id, String titre, String description, Utilisateur vendeur, Date creation, Double prix, int statut) {
 		Annonce annonce = new Annonce();
 		String url = "127.0.0.1:9003";
 		Connection con;
 		try {
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
 			Statement stmt = con.createStatement();
-			ResultSet results = stmt.executeQuery("INSERT INTO ANNONCES (ID , TITLE , CONTENT , USER_ID, CREATION_DATE, PRICE , STATUS)");
-		    while (results.next()) {
+			ResultSet results = stmt.executeQuery("INSERT INTO ANNONCES (ID , TITLE , CONTENT , USER_ID, CREATION_DATE, PRICE , STATUS) VALUES (?,?,?,?,?,?,?)");
 		    	annonce.setId(results.getInt(1));
 		    	annonce.setTitre(results.getString(2));
 		    	annonce.setDescription(results.getString(3));
@@ -109,11 +108,22 @@ public class AnnonceDao implements IAnnonceDao{
 		    	annonce.setVendeur(UserDao.getUserById(results.getString(4)));
 		    	annonce.setCreation(results.getDate(5));
 		    	annonce.setStatut(results.getInt(7));    
-		    }
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return annonce;
+	}
+	
+	public void deleteAnnonce(int id) {
+		String url = "127.0.0.1:9003";
+		Connection con;
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
+			Statement stmt = con.createStatement();
+			ResultSet results = stmt.executeQuery("DELETE FROM ANNONCES WHERE ID = ?");
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
