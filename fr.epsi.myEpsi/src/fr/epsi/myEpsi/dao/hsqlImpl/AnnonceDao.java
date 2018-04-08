@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.epsi.myEpsi.beans.Annonce;
+import fr.epsi.myEpsi.beans.Utilisateur;
 import fr.epsi.myEpsi.dao.IAnnonceDao;
 
 public class AnnonceDao implements IAnnonceDao{
 	
 	public static Annonce getAnnonceById(int id) {
 		Annonce annonce = new Annonce();
-
 		String url = "127.0.0.1:9003";
 		Connection con;
 		try {
@@ -25,7 +25,6 @@ public class AnnonceDao implements IAnnonceDao{
 			ResultSet results = stmt.executeQuery("SELECT * FROM ANNONCES WHERE ID = ?");
 
 			if (results.next()) {
-				annonce = new Annonce();
 				annonce.setId(results.getInt(1));
 				annonce.setTitre(results.getString(2));
 				annonce.setDescription(results.getString(3));
@@ -93,4 +92,28 @@ public class AnnonceDao implements IAnnonceDao{
         }
         return nbAnnonces;
     }
+	
+	public static Annonce addAnnonce(int id, String titre, String description, Utilisateur vendeur, Date creation, Double prix, int statut) {
+		Annonce annonce = new Annonce();
+		String url = "127.0.0.1:9003";
+		Connection con;
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
+			Statement stmt = con.createStatement();
+			ResultSet results = stmt.executeQuery("INSERT INTO ANNONCES (ID , TITLE , CONTENT , USER_ID, CREATION_DATE, PRICE , STATUS)");
+		    while (results.next()) {
+		    	annonce.setId(results.getInt(1));
+		    	annonce.setTitre(results.getString(2));
+		    	annonce.setDescription(results.getString(3));
+		    	annonce.setPrix(results.getString(6));
+		    	annonce.setVendeur(UserDao.getUserById(results.getString(4)));
+		    	annonce.setCreation(results.getDate(5));
+		    	annonce.setStatut(results.getInt(7));    
+		    }
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return annonce;
+	}
 }
