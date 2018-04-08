@@ -23,7 +23,7 @@ public class Premier implements PremierMBean {
     public void nbAnnonce() {
         System.out.println("Compte le nombre d'annonce");
         IAnnonceDao annonceDao = new AnnonceDao();
-        int nbAnnonce = annonceDao.countAnnonces();
+        int nbAnnonce = annonceDao.getNbAnnonces();
 
     }
 
