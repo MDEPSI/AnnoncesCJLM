@@ -2,6 +2,7 @@ package fr.epsi.myEpsi.dao.hsqlImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,6 +22,7 @@ public class AnnonceDao implements IAnnonceDao{
 	
 	private static final Logger logger = LogManager.getLogger(StartupListener.class);
 	
+	@Override
 	public Annonce getAnnonceById(int id) {
 		logger.info("getAnnonceById");
 		Annonce annonce = new Annonce();
@@ -30,10 +32,13 @@ public class AnnonceDao implements IAnnonceDao{
 		try {
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
 
-			Statement stmt = con.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM ANNONCES WHERE ID = '"+id+"'");
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM ANNONCES WHERE ID =  ?");
+			stmt.setInt(1, id);
+			
+			ResultSet results = stmt.executeQuery();
+			System.out.println("res , "+results);
 
-			if (results.next()) {
+//			if (results.next()) {
 				annonce = new Annonce();
 				annonce.setId(results.getInt(1));
 				annonce.setTitre(results.getString(2));
@@ -48,7 +53,7 @@ public class AnnonceDao implements IAnnonceDao{
 //					annonce.setAchat(results.getDate(9));
 				}
 //				annonce.setPrix(results.getDouble(11));
-			}
+//			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,6 +61,27 @@ public class AnnonceDao implements IAnnonceDao{
 		return annonce;
 	}
 	
+	@Override
+	public Annonce setAnnonceById(int id, String titre) {
+		logger.info("setAnnonceById");
+		Annonce annonce = new Annonce();
+
+		String url = "127.0.0.1:9003";
+		Connection con;
+		try {
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
+
+			Statement stmt = con.createStatement();
+			ResultSet results = stmt.executeQuery("UPDATE ANNONCES set title = '"+titre+"' WHERE ID = '"+id+"'");
+
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return annonce;
+	}
+	
+	@Override
 	public List<Annonce> getAllAnnonces() {
 		logger.info("getAllAnnonces");
 		List<Annonce> offers = new ArrayList<>();
@@ -88,6 +114,7 @@ public class AnnonceDao implements IAnnonceDao{
 		return offers;
 	}
 	
+	@Override
 	public int getNbAnnonces() {
 		logger.info("getNbAnnonces");
         int nbAnnonces = 0;
@@ -109,7 +136,9 @@ public class AnnonceDao implements IAnnonceDao{
         return nbAnnonces;
     }
 
-	public void addAnnonce(int id, String titre, String description, Utilisateur vendeur, Date creation, Double prix, int statut) {
+	@Override
+	public void addAnnonce(int id, String titre, String description, Double prix, Utilisateur vendeur, Date creation,
+			int statut) {
 		logger.info("addAnnonce");
 		Annonce annonce = new Annonce();
 		String url = "127.0.0.1:9003";
@@ -131,6 +160,7 @@ public class AnnonceDao implements IAnnonceDao{
 		}
 	}
 	
+	@Override
 	public void deleteAnnonce(int id) {
 		logger.info("deleteAnnonce");
 		String url = "127.0.0.1:9003";
@@ -146,10 +176,4 @@ public class AnnonceDao implements IAnnonceDao{
 	}
 
 
-	@Override
-	public void addAnnonce(int id, String titre, String description, Double prix, Utilisateur vendeur, Date creation,
-			int statut) {
-		// TODO Auto-generated method stub
-		
-	}
 }

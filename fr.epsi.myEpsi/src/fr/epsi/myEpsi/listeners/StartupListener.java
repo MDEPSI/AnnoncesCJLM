@@ -37,7 +37,7 @@ public class StartupListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
          // TODO Auto-generated method stub
-    	System.out.println("Démarrage de l'appli");
+    	logger.info("Démarrage de l'appli");
     	try {
     		Class.forName("org.hsqldb.jdbcDriver");
     		String url = "127.0.0.1:9003";

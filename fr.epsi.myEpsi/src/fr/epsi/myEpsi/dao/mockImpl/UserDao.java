@@ -29,7 +29,6 @@ public class UserDao implements IUserDao{
 	}
 	
 	
-	@Override
 	public List<Utilisateur> getUsers(String id) {
 		// TODO Auto-generated method stub
 		List<Utilisateur> myUsers = new ArrayList<>();
@@ -39,7 +38,6 @@ public class UserDao implements IUserDao{
 		return myUsers;
 	}
 
-	@Override
 	public Utilisateur getUtilisateur(String id) {
 		// TODO Auto-generated method stub
 		Utilisateur myUser = new Utilisateur();
@@ -51,7 +49,6 @@ public class UserDao implements IUserDao{
 		return myUser;
 	}
 	
-	@Override
 	public boolean checkLogin(Utilisateur user) {
 		boolean accesOk = false;
 		Utilisateur existingUser = null;
@@ -62,4 +59,36 @@ public class UserDao implements IUserDao{
 		}
 		return accesOk;
 	}
+
+
+	@Override
+	public List<Utilisateur> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+//	@Override
+//	public Utilisateur getUserById(String id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+
+
+
+	@Override
+	public Utilisateur getUserById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void addUser(int id, String password, String nom, boolean administrateur) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

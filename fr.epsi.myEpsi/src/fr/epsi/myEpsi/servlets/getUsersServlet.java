@@ -13,8 +13,8 @@ import fr.epsi.myEpsi.beans.Annonce;
 import fr.epsi.myEpsi.beans.Utilisateur;
 import fr.epsi.myEpsi.dao.IAnnonceDao;
 import fr.epsi.myEpsi.dao.IUserDao;
-import fr.epsi.myEpsi.dao.mockImpl.AnnonceDao;
-import fr.epsi.myEpsi.dao.mockImpl.UserDao;
+import fr.epsi.myEpsi.dao.hsqlImpl.AnnonceDao;
+import fr.epsi.myEpsi.dao.hsqlImpl.UserDao;
 
 /**
  * Servlet implementation class getUsersServlet
@@ -39,7 +39,7 @@ public class getUsersServlet extends HttpServlet {
 		String login = request.getParameter("LOGIN");
 		IUserDao userDao = new UserDao();
 //		annonceDao.getAnnonces(login);
-		List<Utilisateur> myUsers = userDao.getUsers(login);
+		List<Utilisateur> myUsers = userDao.getAllUsers();
 
 		request.setAttribute("USERS", myUsers);
 		request.getRequestDispatcher("users.jsp").forward(request, response);

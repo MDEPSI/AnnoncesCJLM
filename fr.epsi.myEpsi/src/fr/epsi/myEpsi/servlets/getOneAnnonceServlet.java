@@ -3,6 +3,7 @@ package fr.epsi.myEpsi.servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,18 +29,30 @@ public class getOneAnnonceServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int id = Integer.valueOf(req.getParameter("id"));
+		IAnnonceDao annonceDao = new AnnonceDao();
+		
+		//TO DO récupérer l'id 
+		annonceDao.deleteAnnonce(id);
+
+		super.doDelete(req, resp);
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = request.getParameter("ID");
+		int id = Integer.valueOf(request.getParameter("id"));
 		System.out.println(id);
 		IAnnonceDao annonceDao = new AnnonceDao();
 		
 		//TO DO récupérer l'id 
-		Annonce myAnnonce = annonceDao.getAnnonce(2);
-
+		Annonce myAnnonce = annonceDao.getAnnonceById(id);
+		System.out.println(myAnnonce);
 		request.setAttribute("ANNONCES", myAnnonce);
 		request.getRequestDispatcher("oneAnnonce.jsp").forward(request, response);
 		
@@ -52,11 +65,13 @@ public class getOneAnnonceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String titre = request.getParameter("titre");
-		IAnnonceDao userDao = new AnnonceDao();
-		Annonce AnnonceTest = new Annonce();
-		AnnonceTest.setTitre(titre);
-		doGet(request, response);
-		System.out.println(titre);
+		int id = Integer.valueOf(request.getParameter("id"));
+		IAnnonceDao annonceDao = new AnnonceDao();
+		annonceDao.getAnnonceById(id);
+		RequestDispatcher rd = request.getRequestDispatcher("getAnnoncesServlet");
+		rd.forward(request,response);
+//		doGet(request, response);
+//		System.out.println(titre);
 	}
 	
 	//ajouter delete

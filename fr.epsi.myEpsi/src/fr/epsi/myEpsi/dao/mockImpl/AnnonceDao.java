@@ -2,6 +2,7 @@ package fr.epsi.myEpsi.dao.mockImpl;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import fr.epsi.myEpsi.beans.Annonce;
 import fr.epsi.myEpsi.beans.Statuts;
@@ -41,7 +42,6 @@ public class AnnonceDao implements IAnnonceDao {
 		
 	}
 
-	@Override
 	public List<Annonce> getAnnonces(String id) {
 		// TODO Auto-generated method stub
 		List<Annonce> myAnnonces = new ArrayList<>();
@@ -55,7 +55,6 @@ public class AnnonceDao implements IAnnonceDao {
 	}
 
 
-	@Override
 	public Annonce getAnnonce(int id) {
 		// TODO Auto-generated method stub
 		Annonce myAnnonce = new Annonce();
@@ -65,6 +64,51 @@ public class AnnonceDao implements IAnnonceDao {
 			}
 		}
 		return myAnnonce;
+	}
+
+	@Override
+	public List<Annonce> getAllAnnonces() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public Annonce getAnnonceById(String id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+
+	@Override
+	public int getNbAnnonces() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public Annonce getAnnonceById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addAnnonce(int id, String titre, String description, Double prix, Utilisateur vendeur, Date creation,
+			int statut) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAnnonce(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Annonce setAnnonceById(int id, String titre) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

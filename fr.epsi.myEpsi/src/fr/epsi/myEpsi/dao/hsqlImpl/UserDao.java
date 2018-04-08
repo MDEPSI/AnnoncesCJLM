@@ -17,6 +17,7 @@ public class UserDao implements IUserDao
 {
 	private static final Logger logger = LogManager.getLogger(StartupListener.class);
 	
+	@Override
 	public List<Utilisateur> getAllUsers() {
 		logger.info("getAllUsers");
 		List<Utilisateur> users = new ArrayList<>();
@@ -43,6 +44,7 @@ public class UserDao implements IUserDao
 		return users;
 	}
 	
+	@Override
 	public Utilisateur getUserById(String string) {
 		logger.info("getUserById");
 		Utilisateur user = new Utilisateur();
@@ -51,7 +53,7 @@ public class UserDao implements IUserDao
 		try {
 			con = DriverManager.getConnection("jdbc:hsqldb:hsql://"+url, "SA", "");
 			Statement stmt = con.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM USERS WHERE ID ='"+string+"'");
+			ResultSet results = stmt.executeQuery("SELECT * FROM USERS WHERE ID ='ldupont@gmail.com'");
 
 			System.out.println("res "+results);
 			if(results.next()){
@@ -67,6 +69,7 @@ public class UserDao implements IUserDao
 		return user;
 	}
 
+	@Override
 	public void addUser(int id, String password, String nom, boolean administrateur) {
 		logger.info("addUser");
 		Utilisateur user = new Utilisateur();

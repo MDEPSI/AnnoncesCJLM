@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.epsi.myEpsi.beans.Annonce;
 import fr.epsi.myEpsi.dao.IAnnonceDao;
-import fr.epsi.myEpsi.dao.mockImpl.AnnonceDao;
+import fr.epsi.myEpsi.dao.hsqlImpl.AnnonceDao;
 
 /**
  * Servlet implementation class getAnnoncesServlet
@@ -36,7 +36,9 @@ public class getAnnoncesServlet extends HttpServlet {
 		String login = request.getParameter("LOGIN");
 		IAnnonceDao annonceDao = new AnnonceDao();
 //		annonceDao.getAnnonces(login);
-		List<Annonce> myAnnonces = annonceDao.getAnnonces(login);
+		int my = annonceDao.getNbAnnonces();
+		List<Annonce> myAnnonces = annonceDao.getAllAnnonces();
+		System.out.println("my : "+myAnnonces);
 
 		request.setAttribute("ANNONCES", myAnnonces);
 		request.getRequestDispatcher("annonces.jsp").forward(request, response);

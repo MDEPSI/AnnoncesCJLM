@@ -36,8 +36,8 @@ public class getOneUserServlet extends HttpServlet {
 		IUserDao userDao = new UserDao();
 		
 		//TO DO récupérer l'id 
-		Utilisateur myUser = userDao.getUtilisateur("ID");
-
+		Utilisateur myUser = userDao.getUserById(id);
+		System.out.println("user "+myUser);
 		request.setAttribute("USERS", myUser);
 		request.getRequestDispatcher("oneUser.jsp").forward(request, response);
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
